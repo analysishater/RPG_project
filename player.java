@@ -1,4 +1,3 @@
-package RPG;
 
 import java.util.HashSet;
 
@@ -15,10 +14,22 @@ abstract public class player {
         this.name = name;//if extands we use super directly
     }
 
-    abstract public boolean state();//to chack the state 
-    //attaque
+    public boolean state() {
+        if (get_pva() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
+    //subir degat
+    abstract public void subir_degat(int degree);
+
+    //attaque
     abstract public void attaque(player p2);
+
+    // afficher les infos
+    abstract public void affiche_state();
 
     // evolution abstract
     abstract public void evolution();
@@ -79,37 +90,6 @@ abstract public class player {
             set_level(life);
         }
 
-    }
-
-    //subir degat
-    public void subir_degat(int degree) {
-        int life = get_pva();
-        if (life == 0) {
-            System.out.println("you are already out the game");
-        } else {
-            System.out.println("you received an attaque");
-            life = life - degree;
-            if (life >= 0) {
-                setpva(life);
-            } else {
-                life = 0;
-                setpva(life);
-
-            }
-
-        }
-    }
-
-    // afficher les infos
-    public void affiche_state() {
-        // name , level , pva , capacities
-        System.out.println("name of the player is=" + name);
-        System.out.println("level of the player is=" + level);
-        System.out.println("life point of the player is=" + pva);
-        System.out.println("and its capacities are =");
-        for (String c : capacities) {
-            System.out.println(c);
-        }
     }
 
 }
